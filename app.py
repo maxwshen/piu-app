@@ -9,5 +9,3 @@ def index():
 # def index(page):
   # return render_template('/articles/' + page + '.html')
   return 'Hello world!'
-
-app.run(debug=True)

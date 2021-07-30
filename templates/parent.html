@@ -1,0 +1,34 @@
+<!-- Parent HTML file, with header, navigation, footer. Inherited by all pages. -->
+
+<!doctype html>
+<html>
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+    <link rel="shortcut-icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    {% endblock %}
+  </head>
+
+  <body>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+
+    <div id="footer">
+      <hr>
+      <p style="text-align:center;margin-bottom:0;">
+        An open-source hobby project by aesthete.
+      </p>
+      <p style="text-align:center;">
+        <a href="https://www.github.com/maxwshen/piu-analysis">GitHub</a>  ·  <a href="">Discord</a>
+      </p>
+    </div>
+
+  </body>
+
+</html>

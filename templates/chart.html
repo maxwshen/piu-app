@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+{% extends "parent.html" %}
+
+{% block title %} {{info.name}} {% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<script src="https://code.createjs.com/1.0.0/createjs.min.js" delay></script>
+	<script src="https://cdn.plot.ly/plotly-2.3.0.min.js" delay></script>
+	<!-- <script src="{{ url_for('static', filename='artist.js') }}" delay></script> -->
+	<script src="{{ url_for('static', filename='chart-card.js') }}" delay></script>
+	<script src="{{ url_for('static', filename='chart-detail.js') }}" delay></script>
+	<!-- <script src="{{ url_for('static', filename='test.js') }}" delay></script> -->
+{% endblock %}
+
+{% block content %}
+	<h5>{{info.name}}</h5>
+
+	<p>
+		Pack: {{info.pack}}<br>
+		Predicted difficulty: <font color={{info['difficulty string color']}}> {{ info['difficulty string'] }} {{ info['level'] }} - {{ info['predicted difficulty'] }} </font> <br>
+		Similar charts: <br> 
+		{{ info['parsed similar charts'] | safe }} <br>
+	</p>
+
+	<!-- <img>
+		<canvas id="demoCanvas" width="100" height="100"></canvas>
+	</img> -->
+
+	<!-- Use max-width on plotly divs to autoscale for mobile -->
+	<div id="canvas_card" style="max-width:800px;height:320px;"></div>
+	<script type="text/javascript">
+		draw_card("canvas_card", {{ data | tojson |safe }});
+	</script>
+
+
+  <div id="chart_detail_module" style="overflow:auto">
+    <div class="chart_detail_container" data-num="0">
+      <div class="control-row">
+        Section: <select class="section_selector">
+        </select>
+      </div>
+      <div class="canvas_detail" id="canvas_detail" style="height:auto"></div>
+    </div>
+  </div>
+  <script type="text/javascript">
+		draw_detail_interactive({{ data | tojson |safe }});
+	</script>
+
+  {% endblock %}

@@ -1,11 +1,74 @@
-from flask import Flask, redirect, render_template
+import os
+import pandas as pd
+from flask import Flask, redirect, render_template, json
+import boto3
+from markupsafe import escape
+import urllib.parse
+
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+s3 = boto3.client('s3', 
+                  aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], 
+                  aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 
 
-#what to serve for a given page.
+def fetch_files(nm):
+  # If not locally available, download from S3
+  local_fn = f'data/{nm}.csv'
+  if not os.path.isfile(local_fn):
+    s3.download_file(os.environ['S3_BUCKET_NAME'], f'{nm}.csv', local_fn)
+
+  df = pd.read_csv(local_fn, index_col=0)
+  return df
+
+
+def get_data(nm):
+  import pickle
+  local_dir = 'data/'
+  with open(local_dir + f'{nm}.pkl', 'rb') as f:
+    data = pickle.load(f)
+  return data
+
+import lib
+
+'''
+  Dynamically serve content - charts
+'''
+@app.route('/chart/<page>')
+def index(page):
+  # Get URL from nm: from flask import url_for; url_for('index', page=nm)
+  # nm = 'Super Fantasy - SHK S16 arcade'
+  nm = 'Mitotsudaira - ETIA. D19 arcade'
+  # nm = urllib.parse.unquote_plus(page)
+
+  # Check if nm in database, otherwise return 'not found' page
+
+  # Download files from S3 if not available locally
+  # df = fetch_files(nm)
+
+  data = get_data(nm)
+  info_dict = {k: v for k, v in zip(data[0][0], data[0][1])}
+  info_dict = lib.update_info_dict(info_dict)
+
+  # Render HTML template using parsed files
+  return render_template('chart.html', 
+      info=info_dict, 
+      data=data,
+      lib=lib,
+  )
+
 @app.route('/')
-def index():
-# def index(page):
-  # return render_template('/articles/' + page + '.html')
-  return 'Hello world!'
+def home():
+  return 'Home'
+
+
+if __name__ == '__main__':
+  app.debug = True
+  from livereload import Server
+  server = Server(app.wsgi_app)
+  # server.serve(host='0.0.0.0', port=5000)
+  server.serve()

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-{% extends "parent.html" %}
+{% extends "parent.html.jinja" %}
 
 {% block title %} {{info.name}} {% endblock %}
 
@@ -7,10 +7,8 @@
 	{{ super() }}
 	<script src="https://code.createjs.com/1.0.0/createjs.min.js" delay></script>
 	<script src="https://cdn.plot.ly/plotly-2.3.0.min.js" delay></script>
-	<!-- <script src="{{ url_for('static', filename='artist.js') }}" delay></script> -->
 	<script src="{{ url_for('static', filename='chart-card.js') }}" delay></script>
 	<script src="{{ url_for('static', filename='chart-detail.js') }}" delay></script>
-	<!-- <script src="{{ url_for('static', filename='test.js') }}" delay></script> -->
 {% endblock %}
 
 {% block content %}
@@ -19,7 +17,7 @@
 	<p>
 		Pack: {{info.pack}}<br>
 		Predicted difficulty: <font color={{info['difficulty string color']}}> {{ info['difficulty string'] }} {{ info['level'] }} - {{ info['predicted difficulty'] }} </font> <br>
-		Similar charts: <br> 
+		Similar charts with {{ info['cluster tags'] | safe }}: <br> 
 		{{ info['parsed similar charts'] | safe }} <br>
 	</p>
 
@@ -36,9 +34,13 @@
 
   <div id="chart_detail_module" style="overflow:auto">
     <div class="chart_detail_container" data-num="0">
-      <div class="control-row">
-        Section: <select class="section_selector">
-        </select>
+      <div class="row" style="width:600px">
+        <div class="six columns">
+          Display chart section: <select class="section_selector"></select>
+        </div>
+        <div class="six columns">
+          Color notes by: <select class="color_selector"></select>
+        </div>
       </div>
       <div class="canvas_detail" id="canvas_detail" style="height:auto"></div>
     </div>

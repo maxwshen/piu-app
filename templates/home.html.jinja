@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+{% extends "parent.html.jinja" %}
+
+{% block title %} piu center {% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='datatable.css') }}">
+  {% endblock %}
+
+{% block content %}
+  <div style="width:750px;margin:auto">
+    <table id='table' class='display'>
+      <thead>
+        <tr>
+          {% for table_col in table_cols %}
+            <th>{{ table_col }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+    </table>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#table').DataTable( {
+          ajax: {
+            url: "{{ url_for('static', filename='table.json') }}",
+            dataSrc: '',
+            deferRender: true,
+          },
+          columns: [
+            {% for local_col in local_cols %}
+              {data: '{{ local_col }}'}, 
+            {% endfor %}
+          ],
+          dom: '<f<t>lip>',
+          // sort by 'pack' descending so XX is first
+          order: [[1, 'desc']],
+          columnDefs: [
+            {
+              "targets": 0,
+              "data": "download_link",
+              "render": function ( data, type, row, meta ) {
+                return '<a href="' + row['URL'] + '">' + data + '</a>';
+              }
+            } 
+          ],
+        } );
+      } );
+    </script>
+  </div>
+
+{% endblock %}

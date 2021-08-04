@@ -33,6 +33,7 @@ function draw_card(canvas, py_data) {
   
   // timelines
   var plot_data = [trace1];
+  var colors = ['#7cb82f', '#ed7495', '#00aeb3', '#8c68cb', '#f47b16'];
   for (let i = 0; i < card['timelines'].length; i++) {
     var trace = {
       x: card['timelines'][i][0],
@@ -44,6 +45,7 @@ function draw_card(canvas, py_data) {
       marker: {
         symbol: 'square',
         size: 5,
+        color: colors[i],
       }
     }
     plot_data.push(trace);

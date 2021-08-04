@@ -40,7 +40,7 @@ function get_arrow_markers(arrow_xs) {
 
 
 // Colors
-function get_arrow_colors_standard(arrow_xs) {
+function get_arrow_colors_standard(arrow_xs, arrow_texts) {
   var colors = [];
   var blue = '#00a0dc';
   var red = '#ec4339';
@@ -56,7 +56,7 @@ function get_arrow_colors_standard(arrow_xs) {
 }
 
 
-function get_arrow_colors_hints(arrow_texts) {
+function get_arrow_colors_hints(arrow_xs, arrow_texts) {
   var colors = [];
   var mapper = {
     'LT': '#f59890',
@@ -73,19 +73,19 @@ function get_arrow_colors_hints(arrow_texts) {
 
 
 // Drawing
-function draw_holds(holds) {
+function draw_holds(holds, color_func) {
   var shapes = [];
   for (let i = 0; i < holds.length; i++) {
-    shape = draw_single_hold(holds[i]);
+    shape = draw_single_hold(holds[i], color_func);
     shapes.push(shape);
   }
   return shapes;
 }
 
 
-function draw_single_hold(hold) {
+function draw_single_hold(hold, color_func) {
   [x, y_start, y_end, hold_text] = hold;
-  color_list = get_arrow_colors_hints([hold_text]);
+  color_list = color_func([x], [hold_text]);
   width = 0.4;
   return {
     type: 'rect',
@@ -122,12 +122,24 @@ function get_annotations(details){
 
 
 // Primary artist
-function draw_detail(canvas, section_num, py_data) {
+function draw_detail(canvas, section_num, color_by, py_data) {
   info = to_dict(py_data[0]);
   card = to_dict(py_data[1]);
-  details = to_dict(py_data[2][section_num-1]);
+  // [preview, 1, 2, 3, ...]
+  if (section_num == 'preview') {
+    section_num = 0
+  } else {
+    section_num = parseInt(section_num);
+  }
+  details = to_dict(py_data[2][section_num]);
 
   [arrow_xs, arrow_ys, arrow_texts] = parse_arrows(details);
+
+  if (color_by == 'Foot hints') {
+    var color_func = get_arrow_colors_hints;
+  } else {
+    var color_func = get_arrow_colors_standard;
+  }
 
   var trace1 = {
     x: arrow_xs,
@@ -141,20 +153,19 @@ function draw_detail(canvas, section_num, py_data) {
       symbol: get_arrow_markers(arrow_xs),
       size: 25,
       opacity: 0.5,
-      // color: get_arrow_colors_standard(arrow_xs),
-      color: get_arrow_colors_hints(arrow_texts),
+      color: color_func(arrow_xs, arrow_texts),
     },
   };
   var plot_data = [trace1];
 
-  drawn_shapes = draw_holds(details['holds']);
+  drawn_shapes = draw_holds(details['holds'], color_func);
 
   var layout = {
     shapes: drawn_shapes,
     annotations: get_annotations(details),
 
     autosize: false,
-    width: 100 + info['num_panels']*40,
+    width: 160 + info['num_panels']*30,
     height: details['num_lines']*25,
     margin: {
       l: 60,
@@ -171,7 +182,6 @@ function draw_detail(canvas, section_num, py_data) {
       tickmode: 'array',
       tickvals: details['times'],
       ticktext: details['time_labels'],
-      ticklabelposition: 'outside top',
       title: {text: 'Time (seconds)', font: {size: 12}},
       showspikes: true,
       spikedash: 'dot',
@@ -210,19 +220,28 @@ function assignOptions(arr, selector) {
 function draw_detail_interactive(py_data) {
   var innerContainer = document.querySelector('[data-num="0"'),
   plotdiv = innerContainer.querySelector('.canvas_detail'),
-  dropdown = innerContainer.querySelector('.section_selector');
+  section_selector = innerContainer.querySelector('.section_selector');
+  color_selector = innerContainer.querySelector('.color_selector');
+
+  console.log(section_selector);
+  console.log(color_selector);
 
   info = to_dict(py_data[0]);
 
   // initial choice
-  draw_detail(plotdiv, 1, py_data);
+  draw_detail(plotdiv, 'preview', 'Foot hints', py_data);
 
-  var options = Array.from({length: info['num_chart_sections']}, (_, i) => i + 1);
-  assignOptions(options, dropdown);
+  // Assign options
+  var int_arr = Array.from({length: info['num_chart_sections']}, (_, i) => i + 1);
+  var options = ["preview"].concat(int_arr.map(String));
+  assignOptions(options, section_selector);
+
+  assignOptions(['Foot hints', 'Standard'], color_selector);
 
   function updatePlot(){
-    draw_detail(plotdiv, dropdown.value, py_data);
+    draw_detail(plotdiv, section_selector.value, color_selector.value, py_data);
   }
     
-  dropdown.addEventListener('change', updatePlot, false);
+  section_selector.addEventListener('change', updatePlot, false);
+  color_selector.addEventListener('change', updatePlot, false);
 }

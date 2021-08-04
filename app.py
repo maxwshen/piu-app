@@ -16,7 +16,7 @@ s3 = boto3.client('s3',
                   aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 
 
-def fetch_files(nm):
+def fetch_csv(nm):
   # If not locally available, download from S3
   local_fn = f'data/{nm}.csv'
   if not os.path.isfile(local_fn):
@@ -33,42 +33,65 @@ def get_data(nm):
     data = pickle.load(f)
   return data
 
+
+all_df = fetch_csv('charts_all')
 import lib
+local_cols, table_cols = lib.parse_table_data()
+
+feature_df = fetch_csv('features')
+import skill
 
 '''
   Dynamically serve content - charts
 '''
-@app.route('/chart/<page>')
-def index(page):
+@app.route('/chart/<stepchart>')
+def chart_page(stepchart):
   # Get URL from nm: from flask import url_for; url_for('index', page=nm)
-  # nm = 'Super Fantasy - SHK S16 arcade'
-  nm = 'Mitotsudaira - ETIA. D19 arcade'
-  # nm = urllib.parse.unquote_plus(page)
+  if stepchart == 'mitotsudaira':
+    stepchart = 'Mitotsudaira - ETIA. D19 arcade'
+  elif stepchart == 'superfantasy':
+    stepchart = 'Super Fantasy - SHK S16 arcade'
+  # stepchart = urllib.parse.unquote_plus(stepchart)
 
   # Check if nm in database, otherwise return 'not found' page
 
   # Download files from S3 if not available locally
-  # df = fetch_files(nm)
+  # df = fetch_csv(stepchart)
 
-  data = get_data(nm)
+  data = get_data(stepchart)
   info_dict = {k: v for k, v in zip(data[0][0], data[0][1])}
   info_dict = lib.update_info_dict(info_dict)
 
   # Render HTML template using parsed files
-  return render_template('chart.html', 
+  return render_template('chart.html.jinja', 
       info=info_dict, 
       data=data,
       lib=lib,
   )
 
+
+@app.route('/skill/<skill_name>')
+def skill_page(skill_name):
+  skill_name = urllib.parse.unquote_plus(skill_name)
+  chart_lists = skill.get_skill_text(skill_name)
+  return render_template('skill.html.jinja',
+      skill_name=skill_name,
+      singles_charts_str=chart_lists['singles'],
+      doubles_charts_str=chart_lists['doubles'],
+  )
+
+
+@app.route('/skill')
+def main_skill_page():
+  skill_list = skill.get_skill_main_page()
+  return render_template('home_skill.html.jinja', skill_list=skill_list)
+
+
 @app.route('/')
 def home():
-  return 'Home'
+  return render_template('home.html.jinja',
+      local_cols=local_cols, 
+      table_cols=table_cols,
+      get_url=lambda chart: lib.get_url('chart', chart),
+  )
 
-
-if __name__ == '__main__':
-  app.debug = True
-  from livereload import Server
-  server = Server(app.wsgi_app)
-  # server.serve(host='0.0.0.0', port=5000)
-  server.serve()

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+{% extends "parent.html.jinja" %}
+
+{% block title %} piu center {% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  {% endblock %}
+
+{% block content %}
+  <div style="width:750px;margin:auto">
+    <h5> Skills  </h5>
+    <p> {{ skill_list | safe }} </p>
+  </div>
+
+{% endblock %}

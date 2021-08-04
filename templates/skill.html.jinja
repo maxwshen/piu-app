@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+{% extends "parent.html.jinja" %}
+
+{% block title %} piu center {% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='datatable.css') }}">
+  {% endblock %}
+
+{% block content %}
+  <div style="width:750px;margin:auto">
+    <h5> Skill: {{ skill_name | safe }} </h5>
+  </div>
+
+  <div style="width:750px;margin:auto">
+    <h6>Top singles charts</h6>
+    <p>{{ singles_charts_str | safe }}</p>
+  </div>
+
+  <div style="width:750px;margin:auto">
+    <h6>Top doubles charts</h6>
+    <p>{{ doubles_charts_str | safe }}</p>
+  </div>
+
+{% endblock %}

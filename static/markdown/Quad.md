@@ -1,0 +1,1 @@
+A quad is a pattern where you hit four arrows at once. This requires bracketing with both feet. All arrows must be hit correctly or the result will be a miss.

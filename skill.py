@@ -127,6 +127,8 @@ SKILL_COLS_TO_NAME = {
   'Jack - frequency': 'Jack',
   'Footswitch - frequency': 'Footswitch',
   'Bracket - frequency': 'Bracket',
+  'Triple - frequency': 'Triple',
+  'Quad - frequency': 'Quad',
   'Bracket jump run - frequency': 'Bracket jump run',
   'Hold tap single foot - frequency': 'Bracket hold tap',
   'Bracket footswitch - frequency': 'Bracket footswitch',

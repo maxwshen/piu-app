@@ -1,0 +1,1 @@
+A triple is a pattern where you hit three arrows at once. This requires bracketing with one foot. All arrows must be hit correctly or the result will be a miss.

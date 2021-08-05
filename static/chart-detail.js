@@ -63,7 +63,7 @@ function get_arrow_colors_hints(arrow_xs, arrow_texts) {
     'LH': '#c11f1d',
     'RT': '#68c7ec',
     'RH': '#0077b5',
-    'HANDS': '#595c5f',
+    'HAND': '#222222',
   }
   for (let i = 0; i < arrow_texts.length; i++) {
     colors.push(mapper[arrow_texts[i]]);
@@ -125,11 +125,11 @@ function get_annotations(details){
 function draw_detail(canvas, section_num, color_by, py_data) {
   info = to_dict(py_data[0]);
   card = to_dict(py_data[1]);
-  // [preview, 1, 2, 3, ...]
+  // ['preview', '1, 0:06-0:13', 2, 3, ...]
   if (section_num == 'preview') {
     section_num = 0
   } else {
-    section_num = parseInt(section_num);
+    section_num = parseInt(section_num.split(',')[0]);
   }
   details = to_dict(py_data[2][section_num]);
 
@@ -165,16 +165,18 @@ function draw_detail(canvas, section_num, color_by, py_data) {
     annotations: get_annotations(details),
 
     autosize: false,
-    width: 160 + info['num_panels']*30,
+    width: 250 + info['num_panels']*30,
+    // width: 160 + info['num_panels']*30,
     height: details['num_lines']*25,
     margin: {
       l: 60,
-      r: 110,
+      // r: 110,
+      r: 200,
       b: 0,
       t: 0,
     },
 
-    title: {text: details['section_num']},
+    title: {text: details['section_name']},
 
     yaxis: {fixedrange: true,
       // autorange: 'reversed',
@@ -223,18 +225,15 @@ function draw_detail_interactive(py_data) {
   section_selector = innerContainer.querySelector('.section_selector');
   color_selector = innerContainer.querySelector('.color_selector');
 
-  console.log(section_selector);
-  console.log(color_selector);
-
   info = to_dict(py_data[0]);
 
   // initial choice
   draw_detail(plotdiv, 'preview', 'Foot hints', py_data);
 
   // Assign options
-  var int_arr = Array.from({length: info['num_chart_sections']}, (_, i) => i + 1);
-  var options = ["preview"].concat(int_arr.map(String));
-  assignOptions(options, section_selector);
+  // var int_arr = Array.from({length: info['num_chart_sections']}, (_, i) => i + 1);
+  // var options = ["preview"].concat(int_arr.map(String));
+  assignOptions(info['section_names'], section_selector);
 
   assignOptions(['Foot hints', 'Standard'], color_selector);
 

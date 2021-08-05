@@ -35,6 +35,12 @@ function draw_card(canvas, py_data) {
   var plot_data = [trace1];
   var colors = ['#7cb82f', '#ed7495', '#00aeb3', '#8c68cb', '#f47b16'];
   for (let i = 0; i < card['timelines'].length; i++) {
+    // Plot invisible point for empty timelines, e.g., hold
+    if (card['timelines'][i][0].length == 1 & card['timelines'][i][0][0] == 0) {
+      var curr_color = 'rgba(0, 0, 0, 0)';
+    } else {
+      var curr_color = colors[i];
+    }
     var trace = {
       x: card['timelines'][i][0],
       y: card['timelines'][i][1],
@@ -43,9 +49,8 @@ function draw_card(canvas, py_data) {
       mode: 'markers',
       hoverinfo: 'x',
       marker: {
-        symbol: 'square',
-        size: 5,
-        color: colors[i],
+        symbol: 'line-ns',
+        line: {width: 2, color: curr_color},
       }
     }
     plot_data.push(trace);
@@ -64,7 +69,7 @@ function draw_card(canvas, py_data) {
   
   var layout = {
     grid: {
-      rows: 6,
+      rows: num_timelines + 1,
       columns: 1,
       pattern: 'coupled',
     },
@@ -72,6 +77,7 @@ function draw_card(canvas, py_data) {
       title: {text: 'Notes/second', font: {size: 12}},
       domain: domains[0], 
       fixedrange: true,
+      range: [0, Math.min(Math.max(...card['nps'][1]) + 1, 20)],
       ticklabelposition: 'inside bottom',
       hoverformat: '.1f',
     },

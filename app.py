@@ -1,4 +1,4 @@
-import os
+import os, pickle, functools, string
 import pandas as pd
 from flask import Flask, redirect, render_template, json
 import boto3
@@ -15,21 +15,29 @@ s3 = boto3.client('s3',
                   aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'], 
                   aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
 
+S3_SAFE_CHARS = string.ascii_letters + string.digits + "!-_.*'()"
+REPLACE_CHAR = '_'
+def s3_safe(name):
+  convert_safe = lambda char: char if char in S3_SAFE_CHARS else REPLACE_CHAR
+  return ''.join(convert_safe(char) for char in name)
 
+
+@functools.lru_cache(maxsize=None)
 def fetch_csv(nm):
   # If not locally available, download from S3
   local_fn = f'data/{nm}.csv'
   if not os.path.isfile(local_fn):
     s3.download_file(os.environ['S3_BUCKET_NAME'], f'{nm}.csv', local_fn)
-
   df = pd.read_csv(local_fn, index_col=0)
   return df
 
 
+@functools.lru_cache(maxsize=None)
 def get_data(nm):
-  import pickle
-  local_dir = 'data/'
-  with open(local_dir + f'{nm}.pkl', 'rb') as f:
+  local_fn = f'data/{nm}.pkl'
+  if not os.path.isfile(local_fn):
+    s3.download_file(os.environ['S3_BUCKET_NAME'], f'{s3_safe(nm)}.pkl', local_fn)
+  with open(local_fn, 'rb') as f:
     data = pickle.load(f)
   return data
 
@@ -41,22 +49,21 @@ local_cols, table_cols = lib.parse_table_data()
 feature_df = fetch_csv('features')
 import skill
 
+
 '''
   Dynamically serve content - charts
 '''
 @app.route('/chart/<stepchart>')
 def chart_page(stepchart):
-  # Get URL from nm: from flask import url_for; url_for('index', page=nm)
-  if stepchart == 'mitotsudaira':
-    stepchart = 'Mitotsudaira - ETIA. D19 arcade'
-  elif stepchart == 'superfantasy':
-    stepchart = 'Super Fantasy - SHK S16 arcade'
-  # stepchart = urllib.parse.unquote_plus(stepchart)
+  # if stepchart == 'mitotsudaira':
+  #   stepchart = 'Mitotsudaira - ETIA. D19 arcade'
+  # elif stepchart == 'superfantasy':
+  #   stepchart = 'Super Fantasy - SHK S16 arcade'
+  # elif stepchart == 'kos':
+  #   stepchart = 'King of Sales - Norazo S21 arcade'
+  stepchart = urllib.parse.unquote_plus(stepchart)
 
   # Check if nm in database, otherwise return 'not found' page
-
-  # Download files from S3 if not available locally
-  # df = fetch_csv(stepchart)
 
   data = get_data(stepchart)
   info_dict = {k: v for k, v in zip(data[0][0], data[0][1])}

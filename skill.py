@@ -154,8 +154,20 @@ NO_FQ_FILTER_SKILLS = [
   'Splits',
   'Hands',
   'Bracket',
+  'Triple',
+  'Quad',
+  '5-panel stair',
+  '10-panel stair',
+  '9-panel stair',
+  'Bracket jump run',
+  'Bracket hold tap',
+  'Bracket footswitch',
+  'Bracket drill',
+  'Hold footslide',
+  'Hold footswitch',
   'Spin',
-  '180 twists',
+  '180 twist',
+  'Solo diagonal twist',
 ]
 
 '''

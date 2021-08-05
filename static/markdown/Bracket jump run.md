@@ -1,0 +1,1 @@
+A bracket jump run is a series of bracket jumps.

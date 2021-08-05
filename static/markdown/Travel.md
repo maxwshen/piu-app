@@ -1,0 +1,1 @@
+Travel measures how far your feet move during a stepchart. Charts with large travel require you to move to farther panels. These are more common in doubles, especially charts with many cross-pad transitions. In singles, high-movement sections often have twists involving only the corner arrows.

@@ -1,0 +1,1 @@
+Bracket hold taps are patterns where you use one foot to hold a panel and also tap another panel.  

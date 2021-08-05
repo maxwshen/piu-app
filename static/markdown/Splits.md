@@ -1,0 +1,1 @@
+Splits are a doubles-only pattern where each foot is positioned on the outer-most arrows.

@@ -1,0 +1,1 @@
+Jacks are patterns where you use one foot to hit the same panel multiple times. To properly execute jacks, it is important to completely lift your foot off the panel each time, which can be a common mistake at higher speeds. Jacks can sometimes be ambiguous with footswitches, where a single panel is hit multiple times with alternating feet.

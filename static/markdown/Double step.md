@@ -1,0 +1,1 @@
+Double steps are patterns where you use the same foot to step twice in a row.

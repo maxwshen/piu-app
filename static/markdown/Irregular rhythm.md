@@ -1,0 +1,1 @@
+Though PIU's timing window is large, irregular rhythms can still be tricky, especially when sightreading. Compared to DDR, arrows are colored by default by their position/panel rather than their rhythm.

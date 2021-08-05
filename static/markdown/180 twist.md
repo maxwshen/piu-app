@@ -1,0 +1,3 @@
+A 180 twist describes a situation where the panels your feet are hitting have an angle of around 180 degrees. 
+
+At lower level doubles charts, 180 twists are commonly seen in cross-pad transitions of the same color: all blues or all reds. As one of the most challenging twist angles in the game, these twists usually occur at significantly slower speeds (or notes per second) than the rest of the chart.

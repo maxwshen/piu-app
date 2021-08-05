@@ -1,0 +1,1 @@
+Hold taps are patterns where you use one foot for a hold, while using the other foot to tap other panels. Multiple hold taps in a row are typically double steps. In some cases, the same foot is used on the hold and the tap - these are called Bracket hold taps.

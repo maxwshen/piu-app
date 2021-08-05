@@ -1,0 +1,1 @@
+Mid4 doubles describes chart sections that exclusively use the middle 4 panels in doubles. These patterns are typically a challenging barrier for singles players advancing in doubles.

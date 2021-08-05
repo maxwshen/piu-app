@@ -1,0 +1,3 @@
+A diagonal twist describes a situation where the panels your feet are hitting have an angle of between 90 and 180 degrees. We divide diagonal twists into three categories: close, far, and solo.
+
+Close diagonal twists are where the panels your feet are hitting are adjacent, for example yellow-red or yellow-blue. Close diagonal twists often follow 90 degree twists in patterns such as 1759, where 7 to 5 is a close diagonal twist. 

@@ -1,0 +1,1 @@
+No twists are defined as the lack of any twist: 90 degree, diagonal, or 180 degree. Runs with no twists, or front-facing runs, can often be executed with very little movement by using your heels and toes.

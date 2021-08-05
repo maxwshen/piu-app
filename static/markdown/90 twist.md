@@ -1,0 +1,1 @@
+90 degree twists are defined here as any situation where the panels your feet are hitting have an angle of around 90 degrees. With careful positioning, your feet and even your torso can be front-facing while executing 90 degree twists.

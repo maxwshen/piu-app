@@ -1,0 +1,1 @@
+A rolling hit is using a single movement to hit multiple arrows that are spaced tightly together in time. In PIU's normal judgment mode, the perfect window includes up to 83.2 milliseconds after each arrow. Multiple arrows separated by less than the perfect window timing length can be hit in a single jump or bracket.

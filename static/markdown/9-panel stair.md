@@ -1,0 +1,1 @@
+A 10-panel stair is a pattern that involves all 10 panels of both pads in order, except for one panel. These are also known as broken stairs. Unlike a 10-panel stair, when executing a 9-panel stair, you will finish facing the same direction as when you started.

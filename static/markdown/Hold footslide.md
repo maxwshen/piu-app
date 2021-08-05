@@ -1,0 +1,1 @@
+Hold footslides are when you switch from using your heel to your toe (or vice versa) on a hold while holding with the same foot.

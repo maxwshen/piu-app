@@ -1,0 +1,1 @@
+A 5-panel stair is a pattern that involves all 5 panels of one pad in order: either 17593 or 39571.

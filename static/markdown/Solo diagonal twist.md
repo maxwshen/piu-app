@@ -1,0 +1,3 @@
+A diagonal twist describes a situation where the panels your feet are hitting have an angle of between 90 and 180 degrees. We divide diagonal twists into three categories: close, far, and solo.
+
+Solo diagonal twists can be close or far, and describe situations where you must execute a diagonal twist without a preceeding 90 degree twist. For example, 1759 is not a solo diagonal twist, while 159 is. Solo diagonal twists can be difficult because your foot must swing on the correct side of your body: either a front-swing or a back-swing, depending on context. If you swing your foot on the wrong side, you will get twisted up in following sections.

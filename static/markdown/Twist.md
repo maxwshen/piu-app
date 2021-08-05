@@ -1,0 +1,1 @@
+A twist is any twist: 90 degree, diagonal, or 180.

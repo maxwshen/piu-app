@@ -1,0 +1,1 @@
+Footswitches are patterns where you hit a single panel multiple times with alternating feet. These are an alternative to jacks, where the correct choice depends on the chart context. Typically, footswitches are the correct answer with irregular rhythm, or when they avoid a difficult twist forced with jacks. 

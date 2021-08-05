@@ -1,0 +1,1 @@
+A bracket is hitting two notes with a single foot. When two arrows arrive at the exact same time, both arrows must be hit or the result is a miss.

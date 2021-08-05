@@ -1,0 +1,1 @@
+A 10-panel stair is a pattern that involves all 10 panels of both pads in order. When executing a 10-panel stair pattern, you will end facing the opposite direction as when you started.

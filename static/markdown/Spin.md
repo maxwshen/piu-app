@@ -1,0 +1,1 @@
+Spins are patterns that have you turn 360 degrees. These are best performed without the bar.

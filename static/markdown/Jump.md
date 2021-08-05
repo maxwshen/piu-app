@@ -1,0 +1,1 @@
+Jumps require you to use both feet to hit two or more notes. These can consume a lot of energy. Depending on the pattern, it is sometimes possible to conserve energy by placing all of your weight onto just one of your heels or toes on a metal bracket, avoiding lifting both feet into the air.

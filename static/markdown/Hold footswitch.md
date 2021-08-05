@@ -1,0 +1,1 @@
+Hold footswitches are when you switch which foot is used on a hold during the hold.

@@ -1,0 +1,1 @@
+A bracket footswitch is a pattern where you alternate feet hitting brackets on the same panels.

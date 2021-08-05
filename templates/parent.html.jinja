@@ -9,7 +9,34 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='favicon-96x96.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2XBRXQWGP5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2XBRXQWGP5');
+    </script>
+
     <title>{% block title %}{% endblock %}</title>
+
+    <div style="display:flex;justify-content:center;margin-bottom:0;">
+      <img src="{{ url_for('static', filename='rightfoot-downleft.png') }}" height="20px" vertical-align="middle">
+      <img src="{{ url_for('static', filename='leftfoot-upleft.png') }}" height="20px">
+      <span vertical-align="middle">Pump It Up Center</span>
+      <img src="{{ url_for('static', filename='leftfoot-upright.png') }}" height="20px">
+      <img src="{{ url_for('static', filename='rightfoot-downright.png') }}" height="20px">
+    </div>
+
+    <p style="text-align:center;margin-bottom:0">
+      <a href="/">About</a>
+        ·  
+      <a href="chart">Stepcharts</a>
+        ·  
+      <a href="skill">Skills and techniques</a>
+    </p>
+    <hr style="margin-top:5px;margin-bottom:10px">
 
     {% endblock %}
   </head>
@@ -24,8 +51,8 @@
       <p style="text-align:center;margin-bottom:0;">
         An open-source hobby project by aesthete.
       </p>
-      <p style="text-align:center;">
-        <a href="https://www.github.com/maxwshen/piu-analysis">GitHub</a>  ·  <a href="">Discord</a>
+      <p style="text-align:center;margin-bottom:40px">
+        <a href="https://www.github.com/maxwshen/piu-analysis">GitHub</a>  ·  <a href="https://discord.gg/aHbZsk7j2U">Discord</a>
       </p>
     </div>
 

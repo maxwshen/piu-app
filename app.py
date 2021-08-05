@@ -88,6 +88,15 @@ def skill_page(skill_name):
   )
 
 
+@app.route('/chart')
+def main_chart_page():
+  return render_template('home_chart.html.jinja',
+      local_cols=local_cols, 
+      table_cols=table_cols,
+      get_url=lambda chart: lib.get_url('chart', chart),
+  )
+
+
 @app.route('/skill')
 def main_skill_page():
   skill_list = skill.get_skill_main_page()

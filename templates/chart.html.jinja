@@ -12,41 +12,44 @@
 {% endblock %}
 
 {% block content %}
-	<h5>{{info.name}}</h5>
+	<div style="max-width:800px;margin:auto">
 
-	<p>
-		Pack: {{info.pack}}<br>
-		Predicted difficulty: <font color={{info['difficulty string color']}}> {{ info['difficulty string'] }} {{ info['level'] }} - {{ info['predicted difficulty'] }} </font> <br>
-		Similar charts with {{ info['cluster tags'] | safe }}: <br> 
-		{{ info['parsed similar charts'] | safe }} <br>
-	</p>
+		<div style="max-width:760px;margin:auto">
+			<h5>{{info.name}}</h5>
+		
+			Pack: {{info.pack}}<br>
+			Predicted difficulty: <font color={{info['difficulty string color']}}> {{ info['difficulty string'] }} {{ info['level'] }} - {{ info['predicted difficulty'] }} </font> <br>
+			Similar charts with {{ info['cluster tags'] | safe }}: <br> 
+			{{ info['parsed similar charts'] | safe }} <br>
+		</div>
 
-	<!-- <img>
-		<canvas id="demoCanvas" width="100" height="100"></canvas>
-	</img> -->
+		<!-- <img>
+			<canvas id="demoCanvas" width="100" height="100"></canvas>
+		</img> -->
 
-	<!-- Use max-width on plotly divs to autoscale for mobile -->
-	<div id="canvas_card" style="max-width:800px;height:320px;"></div>
-	<script type="text/javascript">
-		draw_card("canvas_card", {{ data | tojson |safe }});
-	</script>
+		<!-- Use max-width on plotly divs to autoscale for mobile -->
+		<div id="canvas_card" style="max-width:800px;height:320px;margin:auto"></div>
+		<script type="text/javascript">
+			draw_card("canvas_card", {{ data | tojson |safe }});
+		</script>
 
 
-  <div id="chart_detail_module" style="overflow:auto">
-    <div class="chart_detail_container" data-num="0">
-      <div class="row" style="width:600px">
-        <div class="six columns">
-          Display chart section: <select class="section_selector"></select>
-        </div>
-        <div class="six columns">
-          Color notes by: <select class="color_selector"></select>
-        </div>
-      </div>
-      <div class="canvas_detail" id="canvas_detail" style="height:auto"></div>
-    </div>
-  </div>
-  <script type="text/javascript">
-		draw_detail_interactive({{ data | tojson |safe }});
-	</script>
+		<div id="chart_detail_module" style="overflow:auto">
+			<div class="chart_detail_container" data-num="0">
+				<div class="row" style="width:80%">
+					<div class="six columns">
+						Display chart section: <select class="section_selector"></select>
+					</div>
+					<div class="six columns">
+						Color notes by: <select class="color_selector"></select>
+					</div>
+				</div>
+				<div class="canvas_detail" id="canvas_detail" style="height:auto"></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			draw_detail_interactive({{ data | tojson |safe }});
+		</script>
+	</div>
 
   {% endblock %}

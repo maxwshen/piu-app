@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 {% extends "parent.html.jinja" %}
 
-{% block title %} piu center {% endblock %}
+{% block title %} Pump It Up Center {% endblock %}
 
 {% block head %}
 	{{ super() }}
@@ -12,43 +12,13 @@
 
 {% block content %}
   <div style="width:750px;margin:auto">
-    <table id='table' class='display'>
-      <thead>
-        <tr>
-          {% for table_col in table_cols %}
-            <th>{{ table_col }}</th>
-          {% endfor %}
-        </tr>
-      </thead>
-    </table>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#table').DataTable( {
-          ajax: {
-            url: "{{ url_for('static', filename='table.json') }}",
-            dataSrc: '',
-            deferRender: true,
-          },
-          columns: [
-            {% for local_col in local_cols %}
-              {data: '{{ local_col }}'}, 
-            {% endfor %}
-          ],
-          dom: '<f<t>lip>',
-          // sort by 'pack' descending so XX is first
-          order: [[1, 'desc']],
-          columnDefs: [
-            {
-              "targets": 0,
-              "data": "download_link",
-              "render": function ( data, type, row, meta ) {
-                return '<a href="' + row['URL'] + '">' + data + '</a>';
-              }
-            } 
-          ],
-        } );
-      } );
-    </script>
+  
+  <!-- Lightweight client-side loader that feature-detects and load polyfills only when necessary -->
+  <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2/webcomponents-loader.min.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
+
+  <zero-md src="{{ url_for('static', filename='markdown/about.md') }}"></zero-md>
+
   </div>
 
 {% endblock %}

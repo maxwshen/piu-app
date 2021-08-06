@@ -1,6 +1,6 @@
 This web app aims to be a knowledge resource for the dance rhythm arcade game, Pump it Up!
 
-You are viewing version 0.10 of this project which publicly launched on August 5th, 2021. It is scuffed in many ways - if you would like to help make thie website better , please join our [Discord](https://discord.gg/aHbZsk7j2U)!
+You are viewing version 0.10 of this project which publicly launched on August 5th, 2021. It is scuffed in many ways - if you would like to help make this website better, please join our [Discord](https://discord.gg/aHbZsk7j2U)!
 
 ### Understand stepcharts at a glance & Find related charts
 ---

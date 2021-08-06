@@ -33,7 +33,7 @@ View top stepcharts for various skills
 - **Mobile UI redesign**
 - **Linking to timestamps in charts**
 - **Improving javascript rendering times**: All visualizations are client-side. Very long chart sections or weak CPUs can time out
-- **Fix visual bugs**: Ugly Dee D15 (now D18), very long holds in Imagination S17 and End of the World S20, and very long chart sections
+- **Fix visual bugs**: In very long chart sections
 - **Progress tracking**: A simple database on this web app could replace the current practice of tracking progress with cell-phone photos or Google drive spreadsheets.
 - **Visualize perfect-window timing**: Currently, rolling hits are identified and automatically clustered together. Instead, if the stepchart is displayed "as-is" with perfect-window visualizations, players studying high-level charts can make their own choices on which groups of notes to execute as rolling brackets.
 - **Language localization**: Korean and Spanish prioritized

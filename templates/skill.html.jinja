@@ -11,7 +11,7 @@
   {% endblock %}
 
 {% block content %}
-  <div style="width:750px;margin:auto">
+  <div style="max-width:750px;margin:auto">
     <h5> Skill: {{ skill_name | safe }} </h5>
 
     <!-- Display markdown -->
@@ -24,12 +24,12 @@
 
   <hr>
 
-  <div style="width:750px;margin:auto">
+  <div style="max-width:750px;margin:auto">
     <h6>Top singles charts</h6>
     <p>{{ singles_charts_str | safe }}</p>
   </div>
 
-  <div style="width:750px;margin:auto">
+  <div style="max-width:750px;margin:auto">
     <h6>Top doubles charts</h6>
     <p>{{ doubles_charts_str | safe }}</p>
   </div>

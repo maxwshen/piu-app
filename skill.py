@@ -9,8 +9,8 @@ import app, lib
 '''
   Parameters
 '''
-MIN_FREQUENCY = 0.01
-TOP_N_PER_LEVEL = 15
+MIN_FREQUENCY = 0.02
+TOP_N_PER_LEVEL = 20
 
 
 '''
